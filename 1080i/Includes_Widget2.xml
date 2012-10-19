@@ -623,10 +623,10 @@
                 <effect type="zoom" start="100" end="97" center="960,540" time="300" tween="cubic" easing="out" />
             </animation>
             <control type="group">
-                <animation type="Conditional" condition="!IsEmpty(Window(Home).Property(PanelWidget2Info))" reversible="false">
+                <animation type="Conditional" condition="Control.HasFocus(5010)" reversible="false">
                     <include>Animation_PanelFlipUp2</include>
                 </animation>
-                <animation type="Conditional" condition="IsEmpty(Window(Home).Property(PanelWidget2Info))" reversible="false">
+                <animation type="Conditional" condition="!Control.HasFocus(5010)" reversible="false">
                     <include>Animation_PanelFlipDown1</include>
                 </animation>
                 <control type="group">
@@ -1561,12 +1561,14 @@
                 </control>
             </control>
             <control type="group">
-                <visible>!IsEmpty(Window(Home).Property(PanelWidget2Info))</visible>
+                <visible>Control.HasFocus(5010)</visible>
                 <animation type="Visible" reversible="false">
-                    <include>Animation_PanelFlipUp1</include>
+                    <include condition="Skin.HasSetting(lowermainmenu)">Animation_PanelFlipUp1</include>
+                    <include condition="!Skin.HasSetting(lowermainmenu)">Animation_PanelFlipDown1</include>
                 </animation>
                 <animation type="Hidden" reversible="false">
-                    <include>Animation_PanelFlipDown2</include>
+                    <include condition="Skin.HasSetting(lowermainmenu)">Animation_PanelFlipDown2</include>
+                    <include condition="!Skin.HasSetting(lowermainmenu)">Animation_PanelFlipUp2</include>
                 </animation>
                 <control type="image">
                     <width>1650</width>
@@ -1582,26 +1584,26 @@
                     <height>402</height>
                     <texture border="50">featured/panel_featured.png</texture>
                 </control>
-                <control type="button" id="6014">
+                <control type="button" id="5014">
                     <include>HiddenObject</include>
-                    <onfocus condition="Substring(Control.GetLabel(4325),movie) | Substring(Control.GetLabel(4325),musicvideo) | Substring(Control.GetLabel(4325),actors)">SetFocus(6020)</onfocus>
-                    <onfocus condition="Substring(Control.GetLabel(4325),tv) | Substring(Control.GetLabel(4325),rss)">SetFocus(6021)</onfocus>
-                    <onfocus condition="Substring(Control.GetLabel(4325),babe)">ClearProperty(PanelWidget2Info,home)</onfocus>
-                    <onfocus condition="Substring(Control.GetLabel(4325),babe)">SetFocus(22223)</onfocus>
-                    <onfocus condition="Substring(Control.GetLabel(4325),addons) | Substring(Control.GetLabel(4325),album) | Substring(Control.GetLabel(4325),artist) | Substring(Control.GetLabel(4325),watchlistmusic) | Substring(Control.GetLabel(4325),pics)">SetFocus(6030)</onfocus>
+                    <onfocus condition="Substring(Control.GetLabel(4321),movie) | Substring(Control.GetLabel(4321),musicvideo) | Substring(Control.GetLabel(4321),actors)">SetFocus(5020)</onfocus>
+                    <onfocus condition="Substring(Control.GetLabel(4321),tv) | Substring(Control.GetLabel(4321),rss)">SetFocus(5021)</onfocus>
+                    <onfocus condition="Substring(Control.GetLabel(4321),babe)">ClearProperty(PanelWidgetInfo,home)</onfocus>
+                    <onfocus condition="Substring(Control.GetLabel(4321),babe)">SetFocus(22222)</onfocus>
+                    <onfocus condition="Substring(Control.GetLabel(4321),addons) | Substring(Control.GetLabel(4321),album)  | Substring(Control.GetLabel(4321),artist) | Substring(Control.GetLabel(4321),watchlistmusic) | Substring(Control.GetLabel(4321),pics)">SetFocus(5030)</onfocus>
                 </control>
                 <control type="group">
                     <posx>27</posx>
                     <posy>26</posy>
                     <width>1596</width>
                     <height>350</height>
-                    <visible>Substring(Control.GetLabel(4325),movie) | Substring(Control.GetLabel(4325),musicvideo) | Substring(Control.GetLabel(4325),actors)</visible>
+                    <visible>Substring(Control.GetLabel(4321),movie) | Substring(Control.GetLabel(4321),musicvideo) | Substring(Control.GetLabel(4321),actors)</visible>
                     <control type="image">
                         <posx>5</posx>
                         <posy>5</posy>
                         <width>218</width>
                         <height>340</height>
-                        <texture background="true" fallback="DefaultVideoBigPoster.png">$INFO[Container(6010).ListItem.Icon]</texture>
+                        <texture background="true" fallback="DefaultVideoBigPoster.png">$INFO[Container(5010).ListItem.Icon]</texture>
                         <aspectratio scalediffuse="false">scale</aspectratio>
                     </control>
                     <control type="label">
@@ -1610,7 +1612,7 @@
                         <width>1373</width>
                         <height>50</height>
                         <font>Font_Reg24</font>
-                        <label>$INFO[Container(6010).ListItem.Label]</label>
+                        <label>$INFO[Container(5010).ListItem.Label]</label>
                         <textoffsetx>15</textoffsetx>
                     </control>
                     <control type="label">
@@ -1620,18 +1622,18 @@
                         <height>30</height>
                         <font>Font_Reg19</font>
                         <textcolor>grey2</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Property(Year)]$INFO[Container(6010).ListItem.Property(RunningTime), • , $LOCALIZE[12391]]$INFO[Container(6010).ListItem.Property(Rating), • ]</label>
+                        <label>$INFO[Container(5010).ListItem.Property(Year)]$INFO[Container(5010).ListItem.Property(RunningTime), • , $LOCALIZE[12391]]$INFO[Container(5010).ListItem.Property(Rating), • ]</label>
                         <textoffsetx>15</textoffsetx>
                     </control>
                     <control type="textbox">
                         <posx>238</posx>
                         <posy>145</posy>
                         <width>1343</width>
-                        <height>195</height>
+                        <height>208</height>
                         <aligny>top</aligny>
                         <font>Font_Reg19</font>
                         <textcolor>white6</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Property(Plot)]</label>
+                        <label>$INFO[Container(5010).ListItem.Property(Plot)]</label>
                         <autoscroll delay="5000" time="5000" repeat="8000">Skin.HasSetting(AutoScroll)</autoscroll>
                     </control>
                     <control type="image">
@@ -1641,96 +1643,97 @@
                         <height>116</height>
                         <aspectratio>keep</aspectratio>
                         <fadetime>400</fadetime>
-                        <texture background="true">$INFO[Container(6010).ListItem.Property(RootPath),,/logo.png]</texture>
+                        <texture background="true">$INFO[Container(5010).ListItem.Property(RootPath),,/logo.png]</texture>
                     </control>
-                    <control type="grouplist" id="6020">
+                    <control type="grouplist" id="5020">
                         <posx>238</posx>
                         <posy>98</posy>
                         <width>1373</width>
-                        <onleft>6020</onleft>
-                        <onright>6020</onright>
-                        <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                        <onback>SetFocus(6010)</onback>
-                        <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                        <onup>SetFocus(6010)</onup>
-                        <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                        <ondown>SetFocus(6010)</ondown>
+                        <onleft>5020</onleft>
+                        <onright>5020</onright>
+                        <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                        <onback>SetFocus(5010)</onback>
+                        <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                        <onup>SetFocus(5010)</onup>
+                        <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                        <ondown>SetFocus(5010)</ondown>
                         <orientation>horizontal</orientation>
-                        <control type="button" id="6015">
+                        <control type="button" id="5015">
                             <label>$LOCALIZE[208]</label>
                             <include>WidgetMenuLabel</include>
-                            <onclick>PlayMedia($ESCINFO[Container(6010).ListItem.Property(Path)])</onclick>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <onclick>PlayMedia($ESCINFO[Container(5010).ListItem.Property(Path)])</onclick>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="6016">
+                        <control type="button" id="5016">
                             <label>$LOCALIZE[20410]</label>
-                            <onclick>PlayMedia($ESCINFO[Container(6010).ListItem.Property(Trailer)])</onclick>
+                            <onclick>PlayMedia($ESCINFO[Container(5010).ListItem.Property(Trailer)])</onclick>
                             <include>WidgetMenuLabel</include>
-                            <visible>!IsEmpty(Container(6010).ListItem.Property(Trailer))</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>!IsEmpty(Container(5010).ListItem.Property(Trailer))</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="6017">
+                        <control type="button" id="5017">
                             <label>$LOCALIZE[31087]</label>
                             <onclick>RunScript(script.metadata.actors,borntoday,10,random)</onclick>
                             <include>WidgetMenuLabel</include>
-                            <visible>Substring(Control.GetLabel(4325),actors)</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),actors)</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="6018">
+                        <control type="button" id="5018">
                             <label>$LOCALIZE[31087]</label>
                             <onclick>SetProperty(SkinWidgets_RandomItems_Update,true)</onclick>
                             <include>WidgetMenuLabel</include>
-                            <visible>Substring(Control.GetLabel(4325),random) + !Substring(Control.GetLabel(4325),custom)</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),random) + !Substring(Control.GetLabel(4321),custom)</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="60190">
+                        <control type="button" id="50190">
                             <label>$LOCALIZE[31087]</label>
-                            <onclick condition="SubString(Control.GetLabel(4325),1custom)">$INFO[Skin.String(SmartPlaylist7.Call)]</onclick>
-                            <onclick condition="SubString(Control.GetLabel(4325),2custom)">$INFO[Skin.String(SmartPlaylist8.Call)]</onclick>
-                            <onclick condition="SubString(Control.GetLabel(4325),3custom)">$INFO[Skin.String(SmartPlaylist9.Call)]</onclick>
-                            <onclick condition="SubString(Control.GetLabel(4325),4custom)">$INFO[Skin.String(SmartPlaylist10.Call)]</onclick>
-                            <onclick condition="SubString(Control.GetLabel(4325),5custom)">$INFO[Skin.String(SmartPlaylist11.Call)]</onclick>
-                            <onclick condition="SubString(Control.GetLabel(4325),6custom)">$INFO[Skin.String(SmartPlaylist12.Call)]</onclick>
+                            <onclick condition="SubString(Control.GetLabel(4321),1custom)">$INFO[Skin.String(SmartPlaylist1.Call)]</onclick>
+                            <onclick condition="SubString(Control.GetLabel(4321),2custom)">$INFO[Skin.String(SmartPlaylist2.Call)]</onclick>
+                            <onclick condition="SubString(Control.GetLabel(4321),3custom)">$INFO[Skin.String(SmartPlaylist3.Call)]</onclick>
+                            <onclick condition="SubString(Control.GetLabel(4321),4custom)">$INFO[Skin.String(SmartPlaylist4.Call)]</onclick>
+                            <onclick condition="SubString(Control.GetLabel(4321),5custom)">$INFO[Skin.String(SmartPlaylist5.Call)]</onclick>
+                            <onclick condition="SubString(Control.GetLabel(4321),6custom)">$INFO[Skin.String(SmartPlaylist6.Call)]</onclick>
+                            <onright condition="SubString(Control.GetLabel(4321),random) + !SubString(Control.GetLabel(4321),custom) + IsEmpty(Container(8000).ListItem.Property(Trailer))">SetProperty(SkinWidgets_RandomItems_Update,true)</onright>
                             <include>WidgetMenuLabel</include>
-                            <visible>Substring(Control.GetLabel(4325),random) + Substring(Control.GetLabel(4325),custom)</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),random) + Substring(Control.GetLabel(4321),custom)</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="6013">
+                        <control type="button" id="5013">
                             <label>$LOCALIZE[31066]</label>
-                            <onclick>ClearProperty(PanelWidget2Info,Home)</onclick>
-                            <onclick>SetFocus(6010)</onclick>
+                            <onclick>ClearProperty(PanelWidgetInfo,Home)</onclick>
+                            <onclick>SetFocus(5010)</onclick>
                             <include>WidgetMenuLabel</include>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
                     </control>
                 </control>
@@ -1739,13 +1742,13 @@
                     <posy>26</posy>
                     <width>1596</width>
                     <height>350</height>
-                    <visible>Substring(Control.GetLabel(4325),tv) | Substring(Control.GetLabel(4325),rss)</visible>
+                    <visible>Substring(Control.GetLabel(4321),tv) | Substring(Control.GetLabel(4321),rss)</visible>
                     <control type="image">
                         <posx>5</posx>
                         <posy>5</posy>
                         <width>605</width>
                         <height>340</height>
-                        <texture background="true" fallback="DefaultVideoBigPoster.png">$INFO[Container(6010).ListItem.Icon]</texture>
+                        <texture background="true" fallback="DefaultVideoBigPoster.png">$INFO[Container(5010).ListItem.Icon]</texture>
                         <aspectratio scalediffuse="false">scale</aspectratio>
                     </control>
                     <control type="label">
@@ -1754,19 +1757,19 @@
                         <width>750</width>
                         <height>50</height>
                         <font>Font_Reg24</font>
-                        <visible>Substring(Control.GetLabel(9308),empty.png)</visible>
-                        <label>$INFO[Container(6010).ListItem.Label]</label>
+                        <label>$INFO[Container(5010).ListItem.Label]</label>
                         <textoffsetx>15</textoffsetx>
+                        <visible>Substring(Control.GetLabel(9307),empty.png)</visible>
                     </control>
                     <control type="label">
                         <posx>610</posx>
                         <posy>5</posy>
                         <width>986</width>
                         <height>50</height>
-                        <visible>!Substring(Control.GetLabel(9308),empty.png)</visible>
                         <font>Font_Reg24</font>
-                        <label>$INFO[Container(6010).ListItem.Label]</label>
+                        <label>$INFO[Container(5010).ListItem.Label]</label>
                         <textoffsetx>15</textoffsetx>
+                        <visible>!Substring(Control.GetLabel(9307),empty.png)</visible>
                     </control>
                     <control type="label">
                         <posx>610</posx>
@@ -1775,7 +1778,7 @@
                         <height>30</height>
                         <font>Font_Reg19</font>
                         <textcolor>grey2</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Label2]$INFO[Container(6010).ListItem.Property(EpisodeNumber), • [UPPERCASE],[/UPPERCASE]]</label>
+                        <label>$INFO[Container(5010).ListItem.Label2]$INFO[Container(5010).ListItem.Property(EpisodeNumber), • [UPPERCASE],[/UPPERCASE]]</label>
                         <textoffsetx>15</textoffsetx>
                     </control>
                     <control type="textbox">
@@ -1786,78 +1789,78 @@
                         <aligny>top</aligny>
                         <font>Font_Reg19</font>
                         <textcolor>white6</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Property(Plot)]</label>
+                        <label>$INFO[Container(5010).ListItem.Property(Plot)]</label>
                         <autoscroll delay="5000" time="5000" repeat="8000">Skin.HasSetting(AutoScroll)</autoscroll>
                     </control>
-                    <control type="image" id="9308">
+                    <control type="image" id="9307">
                         <posx>1261</posx>
                         <posy>10</posy>
                         <width>300</width>
                         <height>116</height>
                         <aspectratio>keep</aspectratio>
                         <fadetime>400</fadetime>
-                        <texture background="true">$INFO[Container(6010).ListItem.Property(RootPath),,/logo.png]</texture>
+                        <texture background="true" fallback="empty.png">$INFO[Container(5010).ListItem.Property(RootPath),,/logo.png]</texture>
                     </control>
-                    <control type="grouplist" id="6021">
-                        <posx>615</posx>
+                    <control type="grouplist" id="5021">
+                        <posx>625</posx>
                         <posy>98</posy>
                         <width>1373</width>
-                        <onleft>6021</onleft>
-                        <onright>6021</onright>
-                        <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                        <onback>SetFocus(6010)</onback>
-                        <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                        <onup>SetFocus(6010)</onup>
-                        <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                        <ondown>SetFocus(6010)</ondown>
+                        <onleft>5021</onleft>
+                        <onright>5021</onright>
+                        <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                        <onback>SetFocus(5010)</onback>
+                        <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                        <onup>SetFocus(5010)</onup>
+                        <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                        <ondown>SetFocus(5010)</ondown>
                         <orientation>horizontal</orientation>
-                        <control type="button" id="6022">
+                        <control type="button" id="5022">
                             <label>$LOCALIZE[208]</label>
                             <include>WidgetMenuLabel</include>
-                            <onclick>PlayMedia($ESCINFO[Container(6010).ListItem.Property(Path)])</onclick>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
-                            <visible>Substring(Control.GetLabel(4325),tv)</visible>
+                            <onclick>PlayMedia($ESCINFO[Container(5010).ListItem.Property(Path)])</onclick>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),tv)</visible>
                         </control>
-                        <control type="button" id="6026">
+                        <control type="button" id="5026">
                             <label>$LOCALIZE[208]</label>
                             <include>WidgetMenuLabel</include>
-                            <onclick>PlayMedia($ESCINFO[Container(6010).ListItem.Property(Media)])</onclick>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
-                            <visible>Substring(Control.GetLabel(4325),rss)</visible>
+                            <onclick>PlayMedia($ESCINFO[Container(5010).ListItem.Property(Media)])</onclick>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),rss)</visible>
                         </control>
-                        <control type="button" id="6023">
-                            <label>$LOCALIZE[31066]</label>
-                            <onclick>ClearProperty(PanelWidget2Info,Home)</onclick>
-                            <onclick>SetFocus(6010)</onclick>
-                            <include>WidgetMenuLabel</include>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
-                        </control>
-                        <control type="button" id="6024">
+                        <control type="button" id="5024">
                             <label>$LOCALIZE[31087]</label>
                             <onclick>SetProperty(SkinWidgets_RandomItems_Update,true)</onclick>
                             <include>WidgetMenuLabel</include>
-                            <visible>Substring(Control.GetLabel(4325),random)</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),random)</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
+                        </control>
+                        <control type="button" id="5023">
+                            <label>$LOCALIZE[31066]</label>
+                            <onclick>ClearProperty(PanelWidgetInfo,Home)</onclick>
+                            <onclick>SetFocus(5010)</onclick>
+                            <include>WidgetMenuLabel</include>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
                     </control>
                 </control>
@@ -1866,13 +1869,13 @@
                     <posy>26</posy>
                     <width>1596</width>
                     <height>350</height>
-                    <visible>Substring(Control.GetLabel(4325),addons) | Substring(Control.GetLabel(4325),album) | Substring(Control.GetLabel(4325),artist) | Substring(Control.GetLabel(4325),watchlistmusic) | Substring(Control.GetLabel(4325),pics)</visible>
+                    <visible>Substring(Control.GetLabel(4321),album) | Substring(Control.GetLabel(4321),addons) | Substring(Control.GetLabel(4321),artist) | Substring(Control.GetLabel(4321),watchlistmusic) | Substring(Control.GetLabel(4321),pics)</visible>
                     <control type="image">
                         <posx>5</posx>
                         <posy>5</posy>
                         <width>340</width>
                         <height>340</height>
-                        <texture background="true" fallback="DefaultAlbumCover.png">$INFO[Container(6010).ListItem.Icon]</texture>
+                        <texture background="true" fallback="DefaultAlbumCover.png">$INFO[Container(5010).ListItem.Icon]</texture>
                         <aspectratio scalediffuse="false">scale</aspectratio>
                     </control>
                     <control type="label">
@@ -1881,7 +1884,7 @@
                         <width>1251</width>
                         <height>50</height>
                         <font>Font_Reg24</font>
-                        <label>$INFO[Container(6010).ListItem.Label][COLOR $VAR[HomeMenuWidgetTextVar]]$INFO[Container(6010).ListItem.Property(Year), [,]][/COLOR]</label>
+                        <label>$INFO[Container(5010).ListItem.Label][COLOR $VAR[HomeMenuWidgetTextVar]]$INFO[Container(5010).ListItem.Property(Year), [,]][/COLOR]</label>
                         <textoffsetx>15</textoffsetx>
                     </control>
                     <control type="label">
@@ -1891,7 +1894,7 @@
                         <height>30</height>
                         <font>Font_Reg19</font>
                         <textcolor>grey2</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Label2]</label>
+                        <label>$INFO[Container(5010).ListItem.Label2]</label>
                         <textoffsetx>15</textoffsetx>
                     </control>
 <!--                     <control type="label">
@@ -1901,9 +1904,9 @@
                         <height>30</height>
                         <font>Font_Reg19</font>
                         <textcolor>grey2</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Label]</label>
+                        <label>$INFO[Container(5010).ListItem.Label]</label>
                         <textoffsetx>15</textoffsetx>
-                        <visible>!Substring(Control.GetLabel(4325),watchlistmusic)</visible>
+                        <visible>!Substring(Control.GetLabel(4321),watchlistmusic)</visible>
                     </control> -->
                     <control type="label">
                         <posx>360</posx>
@@ -1912,9 +1915,9 @@
                         <height>80</height>
                         <font>Font_Reg19</font>
                         <textcolor>grey2</textcolor>
-                        <label>$INFO[Container(6010).ListItem.Property(Fanart)]</label>
+                        <label>$INFO[Container(5010).ListItem.Property(Fanart)]</label>
                         <textoffsetx>15</textoffsetx>
-                        <visible>Substring(Control.GetLabel(4325),pics)</visible>
+                        <visible>Substring(Control.GetLabel(4321),pics)</visible>
                     </control>
                     <control type="textbox">
                         <posx>360</posx>
@@ -1924,9 +1927,9 @@
                         <aligny>top</aligny>
                         <font>Font_Reg19</font>
                         <textcolor>white6</textcolor>
-                        <label fallback="414">$VAR[Widget2TextboxVar]</label>
-                        <visible>!Substring(Control.GetLabel(4321),pics)</visible>
+                        <label fallback="414">$VAR[WidgetTextboxVar]</label>
                         <autoscroll delay="5000" time="5000" repeat="8000">Skin.HasSetting(AutoScroll)</autoscroll>
+                        <visible>!Substring(Control.GetLabel(4321),pics)</visible>
                     </control>
                     <control type="image">
                         <posx>1261</posx>
@@ -1935,70 +1938,70 @@
                         <height>116</height>
                         <aspectratio>keep</aspectratio>
                         <fadetime>400</fadetime>
-                        <texture background="true">$INFO[Skin.String(ArtistsLogosPath)]$INFO[Container(6010).ListItem.Label2,,/logo.png]</texture>
+                        <texture background="true">$INFO[Skin.String(ArtistsLogosPath)]$INFO[Container(5010).ListItem.Label2,,/logo.png]</texture>
                     </control>
-                    <control type="grouplist" id="6030">
+                    <control type="grouplist" id="5030">
                         <posx>360</posx>
                         <posy>98</posy>
                         <width>1373</width>
-                        <onleft>6030</onleft>
-                        <onright>6030</onright>
-                        <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                        <onback>SetFocus(6010)</onback>
-                        <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                        <onup>SetFocus(6010)</onup>
-                        <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                        <ondown>SetFocus(6010)</ondown>
+                        <onleft>5030</onleft>
+                        <onright>5030</onright>
+                        <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                        <onback>SetFocus(5010)</onback>
+                        <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                        <onup>SetFocus(5010)</onup>
+                        <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                        <ondown>SetFocus(5010)</ondown>
                         <orientation>horizontal</orientation>
-                        <control type="button" id="6032">
+                        <control type="button" id="5032">
                             <label>$LOCALIZE[208]</label>
                             <include>WidgetMenuLabel</include>
-                            <onclick condition="Substring(Control.GetLabel(4325),artist)">ActivateWindow(musiclibrary,$ESCINFO[Container(6010).ListItem.Property(Path)],return)</onclick>
-                            <onclick condition="Substring(Control.GetLabel(4325),album) | Substring(Control.GetLabel(4325),watchlistmusic)">$INFO[Container(6010).ListItem.Property(Path)]</onclick>
-                            <onclick condition="!Substring(Control.GetLabel(4325),artist)">$INFO[Container(6010).ListItem.Property(Path)]</onclick>
-                            <onclick condition="!Substring(Control.GetLabel(4325),addons)">RunAddon($INFO[Container(6010).ListItem.Property(Path)])</onclick>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <onclick condition="Substring(Control.GetLabel(4321),artist)">ActivateWindow(musiclibrary,$ESCINFO[Container(5010).ListItem.Property(Path)],return)</onclick>
+                            <onclick condition="Substring(Control.GetLabel(4321),album) | Substring(Control.GetLabel(4321),watchlistmusic)">$INFO[Container(5010).ListItem.Property(Path)]</onclick>
+                            <onclick condition="!Substring(Control.GetLabel(4321),artist) + !Substring(Control.GetLabel(4321),addons)">$INFO[Container(5010).ListItem.Property(Path)]</onclick>
+                            <onclick condition="Substring(Control.GetLabel(4321),addons)">RunAddon($INFO[Container(5010).ListItem.Property(Path)])</onclick>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="6033">
-                            <label>$LOCALIZE[31066]</label>
-                            <onclick>ClearProperty(PanelWidget2Info,Home)</onclick>
-                            <onclick>SetFocus(6010)</onclick>
-                            <include>WidgetMenuLabel</include>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
-                        </control>
-                        <control type="button" id="6034">
+                        <control type="button" id="5034">
                             <label>$LOCALIZE[31087]</label>
                             <onclick>SetProperty(SkinWidgets_RandomItems_Update,true)</onclick>
                             <include>WidgetMenuLabel</include>
-                            <visible>Substring(Control.GetLabel(4325),random) + !Substring(Control.GetLabel(4325),pics)</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),random) + !Substring(Control.GetLabel(4321),pics)</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
-                        <control type="button" id="6035">
+                        <control type="button" id="5035">
                             <label>$LOCALIZE[31087]</label>
                             <onclick>XBMC.RunScript(plugin.image.mypicsdb,0,?action='setproperties'&amp;method='Random'&amp;sort='Added'&amp;limit=10)</onclick>
                             <include>WidgetMenuLabel</include>
-                            <visible>Substring(Control.GetLabel(4325),randompics)</visible>
-                            <onback>ClearProperty(PanelWidget2Info,Home)</onback>
-                            <onback>SetFocus(6010)</onback>
-                            <onup>ClearProperty(PanelWidget2Info,Home)</onup>
-                            <onup>SetFocus(6010)</onup>
-                            <ondown>ClearProperty(PanelWidget2Info,Home)</ondown>
-                            <ondown>SetFocus(6010)</ondown>
+                            <visible>Substring(Control.GetLabel(4321),randompics)</visible>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
+                        </control>
+                        <control type="button" id="5033">
+                            <label>$LOCALIZE[31066]</label>
+                            <onclick>ClearProperty(PanelWidgetInfo,Home)</onclick>
+                            <onclick>SetFocus(5010)</onclick>
+                            <include>WidgetMenuLabel</include>
+                            <onback>ClearProperty(PanelWidgetInfo,Home)</onback>
+                            <onback>SetFocus(5010)</onback>
+                            <onup>ClearProperty(PanelWidgetInfo,Home)</onup>
+                            <onup>SetFocus(5010)</onup>
+                            <ondown>ClearProperty(PanelWidgetInfo,Home)</ondown>
+                            <ondown>SetFocus(5010)</ondown>
                         </control>
                     </control>
                 </control>
@@ -4809,9 +4812,9 @@
                 <animation effect="fade" start="100" end="0" time="0" condition="!Substring(Control.GetLabel(4325),panel)">Conditional</animation>
                 <onleft>6010</onleft>
                 <onright>6010</onright>
-                <onup condition="IsEmpty(Window(Home).Property(PanelWidget2Info))">SetProperty(PanelWidget2Info,True,Home)</onup>
-                <onup condition="IsEmpty(Window(Home).Property(PanelWidget2Info))">SetFocus(6014)</onup>
-                <onup condition="!IsEmpty(Window(Home).Property(PanelWidget2Info))">ClearProperty(PanelWidget2Info,Home)</onup>
+                <onup condition="!Control.HasFocus(6010)">SetProperty(PanelWidget2Info,True,Home)</onup>
+                <onup condition="!Control.HasFocus(6010)">SetFocus(6014)</onup>
+                <onup condition="Control.HasFocus(6010)">ClearProperty(PanelWidget2Info,Home)</onup>
                 <ondown condition="!Skin.HasSetting(lowermainmenu) | IsEmpty(Control.GetLabel(4321))">7993</ondown>
                 <ondown condition="Skin.HasSetting(lowermainmenu) + !IsEmpty(Control.GetLabel(4321))">4444</ondown>
                 <onback>ClearProperty(PanelWidget2Info,Home)</onback>
