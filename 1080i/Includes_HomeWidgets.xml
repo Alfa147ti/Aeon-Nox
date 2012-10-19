@@ -2403,10 +2403,11 @@
                     <include>Animation_VisibleChange200</include>
                     <visible>!Substring(Control.GetLabel(4321),transparent)</visible>
                 </control>
-            </control>
-
-            
-            <control type="group">
+            </control>  
+        </control>
+           <control type="group">
+            <posx>135</posx>
+            <posy>674</posy>
                 <visible>Control.HasFocus(6010)</visible>
                 <animation type="Visible" reversible="false">
                     <include>Animation_PanelFlipUp1</include>
@@ -2857,9 +2858,6 @@
                     <colordiffuse>$VAR[DialogColorVar]</colordiffuse>
                 </control>
             </control>
-            
-            
-        </control>
     </include>
     <include name="5010List">
         <control type="group">

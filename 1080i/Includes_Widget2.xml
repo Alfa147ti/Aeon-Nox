@@ -1560,8 +1560,11 @@
                     <colordiffuse>$VAR[DialogColorVar]</colordiffuse>
                 </control>
             </control>
+        </control>
             <control type="group">
                 <visible>Control.HasFocus(5010)</visible>
+            <posx>135</posx>
+            <posy>-4</posy>
                 <animation type="Visible" reversible="false">
                     <include condition="Skin.HasSetting(lowermainmenu)">Animation_PanelFlipUp1</include>
                     <include condition="!Skin.HasSetting(lowermainmenu)">Animation_PanelFlipDown1</include>
@@ -2014,7 +2017,6 @@
                     <colordiffuse>$VAR[DialogColorVar]</colordiffuse>
                 </control>
             </control>
-        </control>
     </include>
     <include name="Custom1Widget2">
         <item>
